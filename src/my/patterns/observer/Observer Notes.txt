@@ -1,0 +1,22 @@
+Java has its own Observer Class and Observable Class
+
+Subject -> Observable
+
+ addObserver(Observer o)
+ clearChanged()
+ countObservers()
+ deleteObserver(Observer o)
+ deleteObservers() 
+ hasChanged() 
+ notifyObservers() 
+ notifyObservers(Object arg)
+ setChanged()
+
+
+Observer
+	void update(Observable o, Object arg)  
+	
+	
+	The problem with the Java Observer is that the Observable Object reference is sent as the parameter.
+	So the object might get locked or the Observer can access all the information, though its not necessary
+	

@@ -1,0 +1,41 @@
+When creation of classes and usage of new Operator is performed using checks, 
+
+if (type.equals(“Oracle”)){
+return new OracleConnection();
+}
+else if (type.equals(“SQL Server”)){
+return new SqlServerConnection();
+}
+else {
+return new MySqlConnection();
+}
+
+It is better to extract the "changing code" to a seperate class - Factory Class
+
+separating out the part of the code that’s changing so much 
+   — the connection object creation part 
+   — and encapsulating it in its own object. 
+   And that object is a factory object — it’s a factory, written in code, for the creation of connection objects.
+   
+   
+popular way of creating factory objects 
+---------------------------------------
+FirstFactory.java -> directly creates the connection objects and returns it
+
+GoF way of Factory
+------------------
+In Java, XMLReaderFactoryis a final class, not designed for inheritance. A
+factory class is a factory class, and that’s it. It’s not designed to be extended.
+But the formal GoF Factory design pattern is somewhat different — it offers
+you more flexibility because before using GoF factories, you’re supposed to
+extend them.
+
+According to the GoF book, the Factory Method design pattern should “Define
+an interface for creating an object, but let subclasses decide which class to
+instantiate. Factory method lets a class defer instantiation to subclasses.”
+
+Creates a Abstract Factory class and the Sub class will decide which class to return
+
+Use this when too many subclasses of FirstFactory occurs
+
+ConnectionFactory and SecureFactory

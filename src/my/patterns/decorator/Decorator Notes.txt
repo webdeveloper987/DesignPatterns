@@ -1,0 +1,23 @@
+Closed for Modification, Open for Extension
+
+1) A Computer class has a method description() which returns " A computer"
+2) To add to this description "and a montior" and "and a hard disk", we would need to modify the class
+Solution:
+ 1) Create an interface [Interface cannot extend a class, so use an abstract class instead] ComponentDecorator and make it extend the Computer class as the Decorator Objects will need to be held by the same objects as Computer class
+ public abstract class ComponentDecorator extends Computer {
+   public abstract String description();
+ }
+ 
+ 2) Use the has-a relationship in each of its implementations to drive the Decoration added
+ 
+ public class Disk extends ComponentDecorator {
+   Computer computer;
+   public Disk(Computer c) {
+     computer = c;
+   }
+   public String description(){
+     return c.description() + " and a Disk";
+   }
+   
+   
+3) Java stream classes are decorators

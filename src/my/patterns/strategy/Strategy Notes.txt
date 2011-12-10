@@ -1,0 +1,56 @@
+Design Problem:
+   For Cars, we have one method "public void go()" which displays whether driving, flying etc.,
+   We create this using a base class Vehicle and extending/overriding the go methods for every class
+   Problem arises due to maintanence and no use of the base class as the method is overriden
+   
+   Solution:
+     Abstract the most changing code into a seperate class. Here the method GO()
+     Try to use a "has-a" rather than a "is-a" -> Composition over inheritance
+     
+     1) Create interface GoAlgorithm with method go()
+     2) Create implementations GoByDrivingAlgorithm and GoByFlyingAlgorithm
+     3) Vehicle Superclass has a variable GoAlgorithm
+     
+        public class Vehicle{
+           public GoAlgorithm goAlgorithm;
+           
+           public void setGoAlgorithm(GoAlgorithm goAlgorithm){
+             this.goAlgorithm = goAlgorithm;
+           }
+           
+           public void go(){
+              goAlgorithm.go();         
+           }
+        }
+        
+      4) The inherited classes set the Algorithm type during runtime
+      
+      
+        public class Car extends Vehicle{
+        
+           public Car(){
+              setGoAlgorithm(new GoByDrivingAlgorithm());
+           }
+        }
+        
+        public class Jet extends Vehicle{
+        
+           public Car(){
+              setGoAlgorithm(new GoByFlyingAlgorithm());
+           }
+        }
+        
+        
+       5) Switching Algorithms is easy
+       public class RealJet
+       {
+         public static void main(String[] args){
+	       Jet jet = new Jet();
+	       jet.setGoAlgorithm(new GoByDrivingAlgorithm());
+	       jet.go();
+	       jet.setGoAlgorithm(new GoByFlyingFastAlgorithm());
+	       jet.go();
+	       jet.setGoAlgorithm(new GoByDrivingAlgorithm());
+	       jet.go();
+         }
+	}
